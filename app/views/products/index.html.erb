@@ -9,90 +9,46 @@
   <section class="category-section">
     <h2>Shop by Category</h2>
 
-   
-<div class="category-list">
-  <% @categories.each do |category| %>
-    <%= link_to category_path(category), class: "category-card" do %>
-      <h3><%= category.name %></h3>
-      <p><%= category.description %></p>
-      <span>Explore Category →</span>
-    <% end %>
-  <% end %>
-</div>
-
+    <div class="category-list">
+      <% @categories.each do |category| %>
+        <%= link_to category_path(category), class: "category-card" do %>
+          <h3><%= category.name %></h3>
+          <p><%= category.description %></p>
+          <span>Explore Category →</span>
+        <% end %>
+      <% end %>
+    </div>
   </section>
 
-  
-<section class="products-section">
-  <h2>Explore Our Products</h2>
+  <section class="products-section">
+    <h2>Explore Our Products</h2>
 
-  <%= form_with url: products_path, method: :get, local: true,
-      class: "search-form" do |form| %>
+    <%= form_with url: products_path, method: :get, local: true,
+        class: "search-form" do |form| %>
 
-    <%= form.text_field :search,
-        value: params[:search],
-        placeholder: "Search laptops, monitors, accessories..." %>
+      <%= form.text_field :search,
+          value: params[:search],
+          placeholder: "Search products by name, brand or description..." %>
 
-    <%= form.select :category_id,
-        options_from_collection_for_select(
-          @categories,
-          :id,
-          :name,
-          params[:category_id]
-        ),
-        { include_blank: "All Categories" } %>
+      <%= form.select :category_id,
+          options_from_collection_for_select(
+            @categories,
+            :id,
+            :name,
+            params[:category_id]
+          ),
+          { include_blank: "All Categories" } %>
 
-    <%= form.submit "Search", class: "product-button" %>
+      <%= form.submit "Search", class: "product-button" %>
+    <% end %>
 
-  <% end %>
-
-  <% if params[:search].present? || params[:category_id].present? %>
-    <p>
+    <% if params[:search].present? || params[:category_id].present? %>
       <%= link_to "Clear Search", products_path %>
-    </p>
-  <% end %>
+    <% end %>
 
-  <% if @products.empty? %>
-    <p>No products found. Try another search.</p>
-  <% end %>
-```
-
-**Important:** Keep your existing product grid below this code, including its closing `</section>`.
-
-## 11.3 Add search styling
-
-Add this to the bottom of `application.css`:
-
-<CodeBlock language="css" editable>
-/* Product Search */
-
-.search-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 25px 0;
-}
-
-.search-form input[type="text"],
-.search-form select {
-  padding: 13px;
-  border: 1px solid #d5deea;
-  border-radius: 7px;
-  font-size: 15px;
-  flex: 1;
-  min-width: 200px;
-}
-
-.search-form input:focus,
-.search-form select:focus {
-  outline: 2px solid #4778ad;
-}
-
-.search-form input[type="submit"] {
-  border: none;
-  cursor: pointer;
-}
-
+    <% if @products.empty? %>
+      <p>No products found. Try another search.</p>
+    <% end %>
 
     <div class="product-grid">
       <% @products.each do |product| %>
@@ -114,7 +70,8 @@ Add this to the bottom of `application.css`:
               <%= number_to_currency(product.current_price) %>
             </h4>
 
-            <%= link_to "View Details", product_path(product),
+            <%= link_to "View Details",
+                product_path(product),
                 class: "product-button" %>
           </div>
         </article>
