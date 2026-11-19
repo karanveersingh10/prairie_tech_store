@@ -18,6 +18,18 @@ class ProductsController < ApplicationController
     end
 
     @products = @products.order(:name)
+
+    # Pagination
+    @per_page = 6
+    @total_products = @products.count
+    @total_pages = [(@total_products.to_f / @per_page).ceil, 1].max
+
+    requested_page = params[:page].to_i
+    @current_page = [[requested_page, 1].max, @total_pages].min
+
+    @products = @products
+      .offset((@current_page - 1) * @per_page)
+      .limit(@per_page)
   end
 
   def show

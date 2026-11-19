@@ -77,5 +77,30 @@
         </article>
       <% end %>
     </div>
+
+    <% if @total_pages > 1 %>
+      <nav class="pagination" aria-label="Product pages">
+
+        <% if @current_page > 1 %>
+          <%= link_to "Previous",
+              products_path(request.query_parameters.merge(page: @current_page - 1)),
+              class: "pagination-link" %>
+        <% end %>
+
+        <% (1..@total_pages).each do |page| %>
+          <%= link_to page,
+              products_path(request.query_parameters.merge(page: page)),
+              class: "pagination-link #{'active' if page == @current_page}" %>
+        <% end %>
+
+        <% if @current_page < @total_pages %>
+          <%= link_to "Next",
+              products_path(request.query_parameters.merge(page: @current_page + 1)),
+              class: "pagination-link" %>
+        <% end %>
+
+      </nav>
+    <% end %>
+
   </section>
 </div>
