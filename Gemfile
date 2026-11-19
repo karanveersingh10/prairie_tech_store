@@ -3,6 +3,9 @@ source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.4"
+gem "devise"
+gem "activeadmin"
+gem "sassc-rails"
 
 # The original asset pipeline for Rails
 gem "sprockets-rails"

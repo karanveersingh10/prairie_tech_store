@@ -124,3 +124,7 @@ end
 
 puts "Created #{Category.count} categories"
 puts "Created #{Product.count} products"
+AdminUser.find_or_create_by!(email: "admin@prairietechstore.com") do |admin|
+  admin.password = "Admin@12345"
+  admin.password_confirmation = "Admin@12345"
+end
