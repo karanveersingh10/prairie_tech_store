@@ -1,0 +1,124 @@
+
+<div class="store-container">
+  <section class="hero">
+    <p class="hero-label">WELCOME TO PRAIRIE TECH STORE</p>
+    <h1>Technology for your everyday life.</h1>
+    <p>Discover quality laptops, monitors and accessories.</p>
+  </section>
+
+  <section class="category-section">
+    <h2>Shop by Category</h2>
+
+   
+<div class="category-list">
+  <% @categories.each do |category| %>
+    <%= link_to category_path(category), class: "category-card" do %>
+      <h3><%= category.name %></h3>
+      <p><%= category.description %></p>
+      <span>Explore Category →</span>
+    <% end %>
+  <% end %>
+</div>
+
+  </section>
+
+  
+<section class="products-section">
+  <h2>Explore Our Products</h2>
+
+  <%= form_with url: products_path, method: :get, local: true,
+      class: "search-form" do |form| %>
+
+    <%= form.text_field :search,
+        value: params[:search],
+        placeholder: "Search laptops, monitors, accessories..." %>
+
+    <%= form.select :category_id,
+        options_from_collection_for_select(
+          @categories,
+          :id,
+          :name,
+          params[:category_id]
+        ),
+        { include_blank: "All Categories" } %>
+
+    <%= form.submit "Search", class: "product-button" %>
+
+  <% end %>
+
+  <% if params[:search].present? || params[:category_id].present? %>
+    <p>
+      <%= link_to "Clear Search", products_path %>
+    </p>
+  <% end %>
+
+  <% if @products.empty? %>
+    <p>No products found. Try another search.</p>
+  <% end %>
+```
+
+**Important:** Keep your existing product grid below this code, including its closing `</section>`.
+
+## 11.3 Add search styling
+
+Add this to the bottom of `application.css`:
+
+<CodeBlock language="css" editable>
+/* Product Search */
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.search-form input[type="text"],
+.search-form select {
+  padding: 13px;
+  border: 1px solid #d5deea;
+  border-radius: 7px;
+  font-size: 15px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-form input:focus,
+.search-form select:focus {
+  outline: 2px solid #4778ad;
+}
+
+.search-form input[type="submit"] {
+  border: none;
+  cursor: pointer;
+}
+
+
+    <div class="product-grid">
+      <% @products.each do |product| %>
+        <article class="product-card">
+          <div class="product-placeholder">
+            <span>TECH</span>
+          </div>
+
+          <div class="product-info">
+            <p class="product-category">
+              <%= product.category.name %>
+            </p>
+
+            <h3><%= product.name %></h3>
+
+            <p><%= product.description %></p>
+
+            <h4>
+              <%= number_to_currency(product.current_price) %>
+            </h4>
+
+            <%= link_to "View Details", product_path(product),
+                class: "product-button" %>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </section>
+</div>

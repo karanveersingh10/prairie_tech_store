@@ -1,0 +1,36 @@
+
+<div class="store-container">
+  <%= link_to "← Back to Store", root_path, class: "back-link" %>
+
+  <div class="product-detail">
+    <div class="product-detail-image">
+      <span>PRODUCT IMAGE</span>
+    </div>
+
+    <div class="product-detail-info">
+      <p class="product-category">
+        <%= @product.category.name %>
+      </p>
+
+      <h1><%= @product.name %></h1>
+
+      <p><strong>Brand:</strong> <%= @product.brand %></p>
+
+      <p><%= @product.description %></p>
+
+      <h2>
+        <%= number_to_currency(@product.current_price) %>
+      </h2>
+
+      <p>
+        <strong>Availability:</strong>
+        <%= @product.stock_quantity > 0 ? "In Stock" : "Out of Stock" %>
+      </p>
+
+      <p><strong>SKU:</strong> <%= @product.sku %></p>
+
+      <%= link_to "Continue Shopping", root_path,
+          class: "product-button" %>
+    </div>
+  </div>
+</div>

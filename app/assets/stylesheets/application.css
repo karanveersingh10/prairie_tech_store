@@ -1,15 +1,196 @@
+
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require_tree .
  *= require_self
  */
+
+body {
+  margin: 0;
+  background: #f5f7fb;
+  color: #172033;
+  font-family: Arial, sans-serif;
+}
+
+.store-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+.hero {
+  background: #142b4a;
+  color: white;
+  padding: 65px 40px;
+  border-radius: 16px;
+  margin-bottom: 45px;
+}
+
+.hero-label {
+  color: #a9c7f5;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  max-width: 650px;
+}
+
+.category-section,
+.products-section {
+  margin-bottom: 45px;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.category-card,
+.product-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.product-placeholder {
+  height: 160px;
+  background: #eaf0f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #315b8c;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.product-info h3 {
+  min-height: 45px;
+}
+
+.product-category {
+  color: #4778ad;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.product-info h4 {
+  color: #173c68;
+  font-size: 22px;
+}
+
+.product-button {
+  display: inline-block;
+  background: #173c68;
+  color: white;
+  text-decoration: none;
+  padding: 11px 18px;
+  border-radius: 7px;
+}
+
+.product-button:hover {
+  background: #285b91;
+}
+
+@media (max-width: 768px) {
+  .product-grid,
+  .category-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid,
+  .category-list {
+    grid-template-columns: 1fr;
+  }
+}
+.category-card {
+  display: block;
+  color: #172033;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  color: #285b91;
+}
+
+.category-card span {
+  color: #285b91;
+  font-weight: bold;
+}
+
+/* Product Details Page */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 25px;
+  color: #173c68;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  color: #285b91;
+}
+
+.product-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: white;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+.product-detail-image {
+  min-height: 350px;
+  background: #eaf0f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  color: #315b8c;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.product-detail-info h1 {
+  font-size: 34px;
+  color: #172033;
+}
+
+.product-detail-info h2 {
+  color: #173c68;
+  font-size: 28px;
+}
+
+.product-detail-info p {
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .product-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .product-detail-info h1 {
+    font-size: 28px;
+  }
+}
