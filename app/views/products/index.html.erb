@@ -54,7 +54,13 @@
       <% @products.each do |product| %>
         <article class="product-card">
           <div class="product-placeholder">
-            <span>TECH</span>
+            <% if product.image.attached? %>
+              <%= image_tag product.image.variant(:thumb),
+                  alt: product.name,
+                  class: "product-image" %>
+            <% else %>
+              <span>TECH</span>
+            <% end %>
           </div>
 
           <div class="product-info">
@@ -104,3 +110,5 @@
 
   </section>
 </div>
+
+

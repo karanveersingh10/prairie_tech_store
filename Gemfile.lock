@@ -108,10 +108,14 @@ GEM
       cgi (>= 0.3.3)
     error_highlight (0.7.0)
     erubi (1.13.1)
+    ffi (1.17.4)
     globalid (1.4.0)
       activesupport (>= 6.1)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
+    image_processing (1.14.0)
+      mini_magick (>= 4.9.5, < 6)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -140,6 +144,8 @@ GEM
       net-smtp
     marcel (1.2.1)
     matrix (0.4.3)
+    mini_magick (5.4.0)
+      logger
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (5.27.0)
@@ -250,6 +256,9 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.3.0)
+      ffi (~> 1.12)
+      logger
     rubyzip (2.4.1)
     securerandom (0.4.1)
     selenium-webdriver (4.32.0)
@@ -306,6 +315,7 @@ DEPENDENCIES
   capybara
   debug
   error_highlight (>= 0.4.0)
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   puma (>= 5.0)

@@ -4,7 +4,13 @@
 
   <div class="product-detail">
     <div class="product-detail-image">
-      <span>PRODUCT IMAGE</span>
+      <% if @product.image.attached? %>
+        <%= image_tag @product.image.variant(:large),
+            alt: @product.name,
+            class: "product-detail-photo" %>
+      <% else %>
+        <span>PRODUCT IMAGE</span>
+      <% end %>
     </div>
 
     <div class="product-detail-info">

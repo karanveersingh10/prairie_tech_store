@@ -2,6 +2,12 @@
 class Product < ApplicationRecord
   belongs_to :category
 
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [150, 150]
+    attachable.variant :medium, resize_to_limit: [500, 500]
+    attachable.variant :large, resize_to_limit: [1000, 1000]
+  end
+
   validates :sku, presence: true, uniqueness: true
   validates :name, presence: true
   validates :description, presence: true
