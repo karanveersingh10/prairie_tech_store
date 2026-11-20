@@ -1,0 +1,33 @@
+<div class="store-container">
+  <h1>Shopping Cart</h1>
+
+  <% if @cart_items.empty? %>
+    <p>Your shopping cart is empty.</p>
+    <%= link_to "Continue Shopping", root_path, class: "product-button" %>
+  <% else %>
+    <% @cart_items.each do |item| %>
+      <% product = item[:product] %>
+      <div class="cart-item">
+        <div>
+          <h3><%= product.name %></h3>
+          <p><%= number_to_currency(product.current_price) %> each</p>
+          <p>Subtotal: <%= number_to_currency(product.current_price * item[:quantity]) %></p>
+        </div>
+
+        <%= form_with url: update_cart_item_path(product), method: :patch do |form| %>
+          <%= form.number_field :quantity, value: item[:quantity], min: 0, max: product.stock_quantity %>
+          <%= form.submit "Update" %>
+        <% end %>
+
+        <%= button_to "Remove", remove_cart_item_path(product), method: :delete %>
+      </div>
+      <hr>
+    <% end %>
+
+    <h2>Subtotal: <%= number_to_currency(@subtotal) %></h2>
+
+    <%= link_to "Proceed to Checkout", checkout_path, class: "product-button" %>
+    <%= button_to "Clear Cart", clear_cart_path, method: :delete %>
+    <%= link_to "Continue Shopping", root_path, class: "product-button" %>
+  <% end %>
+</div>

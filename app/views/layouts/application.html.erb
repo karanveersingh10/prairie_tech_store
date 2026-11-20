@@ -18,6 +18,24 @@
   </head>
 
   <body>
+
+<!-- CUSTOMER ACCOUNT NAV -->
+<div class="account-menu">
+  <% if customer_signed_in? %>
+    <span>Welcome, <%= current_customer.email %></span>
+    <%= link_to "My Orders", my_orders_path %>
+    <%= button_to "Sign Out", destroy_customer_session_path, method: :delete %>
+  <% else %>
+    <%= link_to "Sign In", new_customer_session_path %>
+    <%= link_to "Create Account", new_customer_registration_path %>
+  <% end %>
+  <%= link_to "🛒 Shopping Cart", cart_path %>
+</div>
+<!-- END CUSTOMER ACCOUNT NAV -->
+
     <%= yield %>
-  </body>
+  
+      <%= link_to "🛒 Cart (#{(session[:cart] || {}).values.sum(&:to_i)})", cart_path, class: "cart-nav-link" %>
+
+</body>
 </html>

@@ -1,0 +1,10 @@
+<div class="container">
+  <h1><%= @page&.title || "Contact Us" %></h1>
+  <p><%= @page&.content %></p>
+  <% if @page %>
+    <p><strong>Email:</strong> <%= @page.email %></p>
+    <p><strong>Phone:</strong> <%= @page.phone %></p>
+    <p><strong>Address:</strong> <%= @page.address %></p>
+  <% end %>
+  <%= link_to "Continue Shopping", root_path %>
+</div>

@@ -1,0 +1,21 @@
+<div class="store-container">
+  <h1>My Order History</h1>
+
+  <% if @orders.any? %>
+    <% @orders.each do |order| %>
+      <div class="cart-item">
+        <div>
+          <h3>Order #<%= order.id %></h3>
+          <p>Date: <%= order.created_at.strftime("%B %d, %Y") %></p>
+          <p>Status: <%= order.status.humanize %></p>
+          <p>Total: <%= number_to_currency(order.total) %></p>
+        </div>
+        <%= link_to "View Order", order_path(order), class: "product-button" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>You haven't placed any orders yet.</p>
+  <% end %>
+
+  <%= link_to "Continue Shopping", root_path, class: "product-button" %>
+</div>

@@ -1,5 +1,7 @@
+
 class Product < ApplicationRecord
   belongs_to :category
+  has_many :order_items, dependent: :restrict_with_error
 
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [150, 150]
@@ -29,6 +31,6 @@ class Product < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    %w[category image_attachment image_blob]
+    %w[category image_attachment image_blob order_items]
   end
 end
