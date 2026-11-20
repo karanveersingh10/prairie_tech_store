@@ -42,6 +42,12 @@
       <%= form.submit "Search", class: "product-button" %>
     <% end %>
 
+    <div class="product-filters">
+      <%= link_to "All Products", products_path, class: "product-button" %>
+      <%= link_to "On Sale", products_path(request.query_parameters.merge(filter: "sale", page: nil)), class: "product-button" %>
+      <%= link_to "Recently Added", products_path(request.query_parameters.merge(filter: "recent", page: nil)), class: "product-button" %>
+    </div>
+
     <% if params[:search].present? || params[:category_id].present? %>
       <%= link_to "Clear Search", products_path %>
     <% end %>

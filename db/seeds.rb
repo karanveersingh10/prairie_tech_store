@@ -104,6 +104,41 @@ products = [
   }
 ]
 
+
+# Generate 90 additional products across the four categories.
+generated_products = {
+  "Laptops" => ["Dell", "Lenovo", "HP", "Acer", "ASUS", "Apple"],
+  "Monitors" => ["Samsung", "LG", "Dell", "Acer", "ASUS", "BenQ"],
+  "Keyboards" => ["Logitech", "Corsair", "Razer", "Keychron", "SteelSeries", "Microsoft"],
+  "Accessories" => ["Anker", "Logitech", "Samsung", "Belkin", "TP-Link", "Kingston"]
+}
+
+product_types = {
+  "Laptops" => ["Business Laptop", "Pro Laptop", "Slim Laptop", "Student Laptop"],
+  "Monitors" => ["Full HD Monitor", "4K Monitor", "Gaming Monitor", "IPS Monitor"],
+  "Keyboards" => ["Wireless Keyboard", "Mechanical Keyboard", "RGB Keyboard", "Compact Keyboard"],
+  "Accessories" => ["USB-C Hub", "Wireless Mouse", "Portable SSD", "Webcam", "Laptop Stand", "USB Adapter"]
+}
+
+index = 1
+generated_products.each do |category_name, brands|
+  23.times do |i|
+    brand = brands[i % brands.length]
+    type = product_types[category_name][i % product_types[category_name].length]
+    model = "Series #{i + 1}"
+    products << {
+      sku: "AUTO-%03d" % index,
+      name: "#{brand} #{type} #{model}",
+      description: "#{brand} #{type.downcase} designed for reliable everyday computing, productivity and performance.",
+      brand: brand,
+      current_price: (49.99 + (index * 13.5) % 950).round(2),
+      stock_quantity: 5 + (index % 26),
+      category: category_name
+    }
+    index += 1
+  end
+end
+
 products.each do |product_data|
   category = Category.find_by!(name: product_data[:category])
 
